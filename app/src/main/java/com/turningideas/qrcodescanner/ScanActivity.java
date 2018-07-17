@@ -93,12 +93,16 @@ public class ScanActivity extends AppCompatActivity {
                     intent.putExtra("barcode", barcodeSparseArray.valueAt(0));
                     setResult(RESULT_OK, intent);
                     finish();
-                    ScanActivity.this.overridePendingTransition(0, 0);
                 }
 
             }
         });
 
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override

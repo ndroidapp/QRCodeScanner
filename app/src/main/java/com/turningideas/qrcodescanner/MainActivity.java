@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ScanActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                MainActivity.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }
