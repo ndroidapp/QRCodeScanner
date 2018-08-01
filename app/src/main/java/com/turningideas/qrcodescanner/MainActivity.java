@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvInfo = findViewById(R.id.tvInfo);
         ivScan = findViewById(R.id.ivScan);
+        //
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);

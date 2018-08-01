@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
@@ -23,11 +21,11 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 
 public class ScanActivity extends AppCompatActivity {
-
-    SurfaceView cameraView;
+    SurfaceView surfaceCamera;
     BarcodeDetector barcodeDetector;
     CameraSource cameraSource;
     SurfaceHolder surfaceHolder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +34,11 @@ public class ScanActivity extends AppCompatActivity {
 
         Animation animation= AnimationUtils.loadAnimation(this,R.anim.fade);
 
+        surfaceCamera = findViewById(R.id.cameraView);
+        surfaceCamera.setAnimation(animation);
 
-        cameraView = findViewById(R.id.cameraView);
-
-        cameraView.setAnimation(animation);
-
-        cameraView.setZOrderMediaOverlay(true);
-        surfaceHolder = cameraView.getHolder();
+        surfaceCamera.setZOrderMediaOverlay(true);
+        surfaceHolder = surfaceCamera.getHolder();
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE)
                 .build();
@@ -56,12 +52,12 @@ public class ScanActivity extends AppCompatActivity {
                 .setAutoFocusEnabled(true)
                 .setRequestedPreviewSize(1920, 1024)
                 .build();
-        cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
+        surfaceCamera.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
                 try {
                     if (ContextCompat.checkSelfPermission(ScanActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        cameraSource.start(cameraView.getHolder());
+                        cameraSource.start(surfaceCamera.getHolder());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
